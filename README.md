@@ -92,7 +92,7 @@ Aggiungiamo quindi al progetto i seguenti moduli che saranno necessari per la co
 
 	npm install --save webpack-shell-plugin @gfx/zopfli gzip axios
 
-A questo punto se provate ad eseguire il comando (con _npm run serve_ si avvia il webserver temporaneo per il debug)
+A questo punto se provate ad eseguire il comando. Con `npm run serve` invece si può avviare dopo aver compilato il webserver temporaneo per il debug.
 	
 	npm run build
 
@@ -104,7 +104,7 @@ Ad esempio, io di solito faccio in questo modo
   - sorgente_micro 
   - sorgente_gui
 
-usando il percorso relativo nel file finalize.js 	**_'../sorgente_micro/webpage.h'_**  il file compilato e aggiornato verrà automaticamente sovrascritto così evito di fare copia e incolla.
+usando il percorso relativo nel file finalize.js **_'../sorgente_micro/webpage.h'_**  il file compilato e aggiornato verrà automaticamente sovrascritto così evito di fare copia e incolla.
 
 **Parte 2**
 
@@ -145,6 +145,7 @@ Molto molto meglio, ma rimane comunque la necessità di fare il “polling” di
 Noi però vogliamo che il funzionamento sia completamente asincrono e bidirezionale; ecco che ci viene quindi in aiuto **WebSocket**, largamente supportato dal 99% dei browser moderni (certo se usate ancora Netscape Navigator non funzionerà …).
 
 _WebSocket è una tecnologia web che fornisce canali di comunicazione full-duplex attraverso una singola connessione TCP (wikipedia)_
+
 Useremo quindi questo canale full-duplex WebSocket per “veicolare” tutte le informazioni necessarie per renderizzare correttamente la pagina in risposta a quello che accade fisicamente lato microcontrollore.
 
 WebSocket è nativamente supportato dal Javascript e quindi da Vue. Non ci sarebbe necessità di installare moduli aggiuntivi, noi però andremo comunque ad installare vue-native-websocket che ci semplifica un po’ la gestione del sorgente Vue oltre ad avere delle funzionalità di base già implementate (auto-reconnect, formattazione dei dati etc etc).
