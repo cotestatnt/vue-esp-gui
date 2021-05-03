@@ -14,6 +14,8 @@ Per non parlare poi di quelli dove c’è una variabile String con tutto il codi
 Ho deciso quindi di aggiungere il “metodo” che ho deciso di adottare io in questo mare magnum, usando un approccio che consente di ottenere firmware più efficienti con pagine realmente dinamiche ed esteticamente gradevoli allo stesso tempo.
 Inoltre, il contenuto delle pagine web potrà essere zippato e memorizzato direttamente in flash, se il microcontrollore ne ha a sufficienza, oppure salvato su una memoria esterna come ad esempio una SD.
 
+![webpage](gpio_list.jpg)
+
 In realtà, come vedremo più avanti, la pagina web generata le possiamo mettere ovunque.
 Ci sono molti servizi completamente gratuiti che consentono di caricare delle webpage “statiche”, anche lo stesso Github ad esempio. Sfruttando dei servizi “serverless” che fanno da ponte, potremo raggiungere il nostro microcontrollore da ovunque.
 Io ad esempio uso [**pipedream**](https://pipedream.com/) che con il piano gratuito che consente di fare un numero di invocazioni giornaliere ampiamente sufficiente per le esigenze più comuni.
