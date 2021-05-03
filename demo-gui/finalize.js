@@ -49,7 +49,6 @@ const uint32_t WEBPAGE_HTML_SIZE = ${indexHTML.length};
 const char WEBPAGE_HTML[] PROGMEM = { ${indexHTML} };
 `;
 
-  // fs.writeFileSync(__dirname + '/dist/webpage.h', source, 'utf8');
-  fs.writeFileSync('../ServerESP8266/webpage.h', source, 'utf8');
+  fs.writeFileSync('webpage.h', source, 'utf8');
 
 });
