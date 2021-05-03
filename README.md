@@ -22,8 +22,8 @@ Il principio è più o meno quello di Blynk, ma ovviamente in questo caso abbiam
 **Parte 1**
 
 Lo sviluppo della nostra applicazione sarà quindi eseguita in due step distinti:
-sviluppo del firmware del microcontrollore.
-sviluppo dell’interfaccia grafica aka pagina/e web che sarà “servita” al client;
+- sviluppo del firmware del microcontrollore.
+- sviluppo dell’interfaccia grafica aka pagina/e web che sarà “servita” al client;
 
 La prima parte la sorvoliamo per ora perchè è la più semplice: in pratica il nostro microcontrollore non dovrà far altro che recuperare dalla memoria flash un array di byte che rappresenta il contenuto della pagina zippato (tutti i browser supportano in modo nativo pagine HTML compresse in formato gzip), oppure i file che compongono il nostro web server da una memoria esterna.
 
@@ -45,9 +45,9 @@ Ho scelto di adottare Vue come framework perché rispetto ad altri “concorrent
 
 Iniziamo!
 
-Come prima cosa, se non è già installato nel vostro PC, dovrete installare Visual Studio Code. Una volta finita l’installazione, aprite la tab “estensioni” ed aggiungete PlatformIO e Vetur.
+Come prima cosa, se non è già installato nel vostro PC, dovrete installare Visual Studio Code. Una volta finita l’installazione, aprite la tab “estensioni” ed aggiungete _PlatformIO_ e _Vetur_.
 
-Installate quindi il runtime node.js. L’installer di node, aggiungerà anche l’indispensabile npm (dovrebbe essere node-packet-manager) che ci consentirà poi di aggiungere tutti i moduli necessari al nostro progetto compreso il framework Vue.
+Installate quindi il runtime **node.js**. L’installer di node, aggiungerà anche l’indispensabile npm (dovrebbe essere node-packet-manager) che ci consentirà poi di aggiungere tutti i moduli necessari al nostro progetto compreso il framework Vue.
 
 Ora siamo pronti per iniziare!
 Apriamo un terminale o una powershell e creiamo una cartella che andrà a contenere i sorgenti dei nostri progetti (se lo ritenete utile) e ci posizioniamoci all’interno di essa.
@@ -72,30 +72,36 @@ Provate ad avviare il progetto seguendo le indicazioni a schermo ed aprite l’i
 Scherzi a parte, adesso siamo pronti per iniziare a sviluppare la nostra pagina per davvero.
 
 Se da linea di comando digitate (per chiudere il webserver di prova CTRL + C)
-code .
+
+	code .
+	
 si avvierà VSCode caricando la cartella corrente come progetto (e riconoscendo in modo automatico che è un progetto Vue grazie al plugin Vetur) all’interno del quale potremo vedere tutti i file generati prima. Possiamo chiudere il terminale, ora quando necessario possiamo usare quello incluso in VSCode (Terminal -> New Terminal).. in realtà potevamo farlo anche prima :-)
 
 Facciamo una rapida rassegna dei file che sono stati generati.
-Tutto ciò che riguarda la compilazione del progetto sarà descritto nel file package.json, dipendenze, script da eseguire, regole di compilazione etc etc. I sorgenti della pagina invece sono nella cartella /src e come potete vedere sono organizzati per “componenti” all’interno di sottocartelle. Nella cartella /public invece ci sono dei componenti statici che verranno inclusi in fase di compilazione.
+Tutto ciò che riguarda la compilazione del progetto sarà descritto nel file package.json, dipendenze, script da eseguire, regole di compilazione etc etc. 
 
-Noi andremo poi ad aggiungere anche qualche altro file per “istruire” il compilatore e fare in modo di generare in modo automatico un file “webpage.h” dove sarà definito il famoso array di byte, oltre ovviamente ai diversi file .vue per ciascun componente del nostro progetto che in questo semplice esempio sarà soltanto uno.
+I sorgenti della pagina invece sono nella cartella **/src** e come potete vedere sono organizzati per “componenti” all’interno di sottocartelle. Nella cartella **/public** invece ci sono dei componenti statici che verranno inclusi in fase di compilazione.
 
-Andiamo subito a configurare il progetto in tal senso prima di mettere mani al codice vero e proprio: aggiungete anche questi due file nella cartella finalize.js e vue.config.js
-Aggiungiamo quindi al progetto i seguenti moduli che saranno necessari per la compilazione
+Noi andremo poi ad aggiungere anche qualche altro file per “istruire” il compilatore e fare in modo di generare in modo automatico un file **“webpage.h”** dove sarà definito il famoso array di byte, oltre ovviamente ai diversi file .vue per ciascun componente del nostro progetto che in questo semplice esempio sarà soltanto uno.
+
+Andiamo subito a configurare il progetto in tal senso prima di mettere mani al codice vero e proprio: aggiungete anche questi due file nella cartella principale [finalize.js](https://github.com/cotestatnt/vue-esp-gui/blob/main/demo-gui/finalize.js) e [vue.config.js](https://github.com/cotestatnt/vue-esp-gui/blob/main/demo-gui/vue.config.js)
+Aggiungiamo quindi al progetto i seguenti moduli che saranno necessari per la coretta compilazione.
+
+**Nota.** se scaricate tutto il progetto di prova completo, posizionatevi all'interno della cartella del progetto Vue **demo-gui** e con il comando _**npm install**_ verranno aggiunti tutti i moduli node.js necessari (definiti in _package.json_)
 
 	npm install --save webpack-shell-plugin @gfx/zopfli gzip axios
 
-A questo punto se provate ad eseguire il comando (con npm run serve si avvia il webserver temporaneo per il debug)
+A questo punto se provate ad eseguire il comando (con _npm run serve_ si avvia il webserver temporaneo per il debug)
 	
-npm run build
+	npm run build
 
 sarà creata una cartella dist che contiene tutti i file HTML, Javascript e CSS necessari per il webserver ed il nostro agognato file webpage.h da importare.
 Con il file finalize.js proposto, webpage.h verrà creato nella cartella principale, ma potete modificare il percorso come volete.
 
 Ad esempio, io di solito faccio in questo modo
-nome_progetto
-sorgente_micro
-sorgente_gui
+- nome_progetto
+  - sorgente_micro 
+  - sorgente_gui
 
 usando il percorso relativo nel file finalize.js 	'../sorgente_micro/webpage.h'
 il file compilato e aggiornato verrà automaticamente sovrascritto così evito di fare copia e incolla.
