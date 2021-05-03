@@ -103,10 +103,10 @@ Ad esempio, io di solito faccio in questo modo
   - sorgente_micro 
   - sorgente_gui
 
-usando il percorso relativo nel file finalize.js 	'../sorgente_micro/webpage.h'
-il file compilato e aggiornato verrà automaticamente sovrascritto così evito di fare copia e incolla.
+usando il percorso relativo nel file finalize.js 	**_'../sorgente_micro/webpage.h'_**  il file compilato e aggiornato verrà automaticamente sovrascritto così evito di fare copia e incolla.
 
-Parte 2
+**Parte 2**
+
 E’ giunto il momento di iniziare a mettere mani al sorgente Vue.
 Vue, come dicevo è abbastanza semplice da usare e ci sono centinaia di esempi già pronti all’uso (una risorsa eccezionale sul web, non solo per Vue, è https://codesandbox.io/), ma ovviamente se non si conosce per niente un sistema di sviluppo un minimo ci si dovrà documentare.
 Io ad esempio ho seguito queste videolezioni che spiegano in modo chiaro come muovere i primi passi, anche se i riferimenti sono un po’ datati e qualcosa potrebbe non tornare con la versione attuale di Vue.
