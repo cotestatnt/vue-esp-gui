@@ -16,10 +16,9 @@ Inoltre, il contenuto delle pagine web potrà essere zippato e memorizzato diret
 
 ![webpage](gpio_list.jpg)
 
-In realtà, come vedremo più avanti, la pagina web generata le possiamo mettere ovunque.
-Ci sono molti servizi completamente gratuiti che consentono di caricare delle webpage “statiche”, anche lo stesso Github ad esempio. Sfruttando dei servizi “serverless” che fanno da ponte, potremo raggiungere il nostro microcontrollore da ovunque.
-Io ad esempio uso [**pipedream**](https://pipedream.com/) che con il piano gratuito che consente di fare un numero di invocazioni giornaliere ampiamente sufficiente per le esigenze più comuni.
-Il principio è più o meno quello di Blynk, ma ovviamente in questo caso abbiamo noi il pieno controllo di cosa e come fare.
+_In realtà la pagina web generata le possiamo mettere dove preferiamo.
+Ci sono molti servizi completamente gratuiti che consentono di caricare delle webpage “statiche”, anche lo stesso Github ad esempio. Sfruttando dei servizi “serverless” che fanno da ponte, si potrebbe raggiungere il nostro microcontrollore da ovunque volendo.
+Il principio è più o meno quello di Blynk, ma ovviamente in questo caso abbiamo noi il pieno controllo di cosa e come fare._
 
 **Parte 1**
 
@@ -37,11 +36,11 @@ Gli strumenti che andremo ad utilizzare sono essenzialmente 3.
 VSCode è un IDE gratuito che da quando è stato introdotto (2015) ha guadagnato un numero sempre crescente di utilizzatori diventando in poco tempo uno degli editor più utilizzati. VSCode ci consentirà di gestire con lo stesso editor sia il progetto per il microcontrollore che quello per l’interfaccia grafica
 - **Node.js**
 
-Un runtime system open source multipiattaforma orientato agli eventi per l'esecuzione di codice JavaScript (wikipedia). In pratica ci consente di eseguire del codice Javascript senza un browser. Altro tool di enorme successo, con moduli per fare praticamente ogni cosa ed una estesa community di sviluppatori.
+_Un runtime system open source multipiattaforma orientato agli eventi per l'esecuzione di codice JavaScript (wikipedia)._ In pratica ci consente di eseguire del codice Javascript senza un browser. Altro tool di enorme successo, con moduli per fare praticamente ogni cosa ed una estesa community di sviluppatori.
 Non andremo a scrivere direttamente del codice con node.js, ma sarà “il motore” con cui andremo a realizzare la nostra pagina web dinamica.
 - **Vue.js**
 
-Un framework JavaScript open-source in configurazione Model–view–viewmodel per la creazione di interfacce utente e single-page applications (wikipedia).
+_Un framework JavaScript open-source in configurazione Model–view–viewmodel per la creazione di interfacce utente e single-page applications (wikipedia)._
 Ho scelto di adottare Vue come framework perché rispetto ad altri “concorrenti” (React, Angular etc etc), ha una curva di apprendimento molto “docile” e si ottengono rapidamente ottimi risultati: io non avevo mai fatto sviluppo web in vita mia prima di iniziare ad usarlo!
 
 
@@ -110,18 +109,19 @@ usando il percorso relativo nel file finalize.js 	**_'../sorgente_micro/webpage.
 **Parte 2**
 
 E’ giunto il momento di iniziare a mettere mani al sorgente Vue.
-Vue, come dicevo è abbastanza semplice da usare e ci sono centinaia di esempi già pronti all’uso (una risorsa eccezionale sul web, non solo per Vue, è https://codesandbox.io/), ma ovviamente se non si conosce per niente un sistema di sviluppo un minimo ci si dovrà documentare.
-Io ad esempio ho seguito queste videolezioni che spiegano in modo chiaro come muovere i primi passi, anche se i riferimenti sono un po’ datati e qualcosa potrebbe non tornare con la versione attuale di Vue.
+Vue, come dicevo è abbastanza semplice da usare e ci sono centinaia di esempi già pronti all’uso (una risorsa eccezionale sul web, non solo per Vue, è [codesandbox](https://codesandbox.io/)), ma ovviamente se non si conosce per niente un sistema di sviluppo un minimo ci si dovrà documentare.
+Io ad esempio ho seguito queste [videolezioni](https://www.youtube.com/watch?v=MdvBAgAeIZQ&list=PL0qAPtx8YtJdUH44fvkzVxy9waP23I_bE) che spiegano in modo chiaro come muovere i primi passi, anche se i riferimenti sono un po’ datati e qualcosa potrebbe non tornare con la versione attuale di Vue.
 
-Acquisito un minimo di conoscenze di base, iniziamo con il nostro progetto di prova definendo i requisiti funzionali della nostra webpage. Come MCU useremo il classico ESP8266, perché molto diffuso e pratico con il WiFi integrato, ma ovviamente si può estendere a qualsiasi microcontrollore.
+Acquisito un minimo di conoscenze di base, iniziamo con il nostro progetto di prova definendo i requisiti funzionali della nostra webpage. Come MCU useremo un ESP8266, perché molto diffuso e pratico con il WiFi integrato, ma ovviamente si può estendere a qualsiasi microcontrollore.
 
 Visualizzeremo la classica pagina che mostra lo stato dei GPIO selezionati nello sketch.
-Se il GPIO è configurato come uscita, ci sarà un “led” di stato. e n pulsante per attivare/disattivare l’uscita
-Se il GPIO è un ingresso invece ci sarà solo un “led” acceso/spento in funzione dello livello del segnale.
-La pagina dovrà essere dinamica, ovvero aggiornarsi automaticamente in modo asincrono e senza refresh “imposti”.
-In qualsiasi momento, potrò ridefinire ingressi e uscite nel firmware della MCU e la pagina dovrà adeguarsi in automatico senza necessità di  modificare il codice lato GUI
-Dovrà avere un aspetto estetico “gradevole”. Ci sono molti framework di stile CSS disponibili, in questo esempio userò Bulma perché leggero, molto accattivante graficamente e soprattutto modulare.
-
+- Se il GPIO è configurato come uscita, ci sarà un “led” di stato. e n pulsante per attivare/disattivare l’uscita
+- Se il GPIO è un ingresso invece ci sarà solo un “led” acceso/spento in funzione dello livello del segnale.
+- La pagina dovrà essere dinamica, ovvero aggiornarsi automaticamente in modo asincrono e senza refresh “imposti”.
+- In qualsiasi momento, potrò ridefinire ingressi e uscite nel firmware della MCU e la pagina dovrà adeguarsi in automatico senza necessità di  modificare il codice lato GUI
+- Dovrà avere un aspetto estetico “gradevole”. 
+ 
+Ci sono molti framework di stile CSS disponibili, in questo esempio userò Bulma perché leggero, molto accattivante graficamente e soprattutto modulare.
 Voglio infatti che le dimensioni del file webpage.h siano il più contenute possibile e quindi andrò ad utilizzare i singoli moduli CSS importando solo quello che viene realmente usato e non tutto il pacchetto completo.
 
 Creiamo quindi una cartella style all’interno di src e in questa cartella aggiungiamo il file bulma.scss dove andremo a definire quali moduli importare in funzione delle esigenze.
@@ -131,26 +131,26 @@ Ovviamente è necessario aggiungere al progetto anche i moduli node necessari ne
 	npm install --save webpack@4 sass-loader@10 sass bulma 
 
 Come detto la nostra pagina dovrà essere dinamica ovvero aggiornarsi in tempo reale senza l’interazione dell’utente. In questo esempio però ci sono due scenari diversi:
-L’utente esegue un’azione sulla pagina e la MCU deve reagire di conseguenza
-Lo stato degli ingressi/uscite della MCU variano in funzione del firmware ed è necessario dare feedback alla pagina.
+- L’utente esegue un’azione sulla pagina e la MCU deve reagire di conseguenza
+- Lo stato degli ingressi/uscite della MCU variano in funzione del firmware ed è necessario dare feedback alla pagina.
 	
 Il primo scenario è il più semplice, basterà fare una chiamata al server con gli opportuni parametri il quale reagirà di conseguenza.
-Il secondo caso invece non è così banale perché le connessioni browser/server sono tipicamente mono-direzionali: il browser chiede una pagina al server, questo la prepara e la invia, il browser chiude la connessione, fine.
+Il secondo caso invece non è così banale perché le connessioni browser/server sono tipicamente mono-direzionali: il browser chiede una pagina al server, questo la prepara, la invia, il browser chiude la connessione, fine.
 
-Il metodo che si vede più comunemente in giro è fare l’odioso refresh della pagina; rozzo, antiquato e decisamente non “reactive”.
+Il metodo che si vede più comunemente in giro è fare l’odioso refresh della pagina; rozzo, antiquato e **decisamente non “reactive”.**
 
 Una seconda opzione è far eseguire delle chiamate asincrone AJAX al browser in background e aggiornare dinamicamente gli elementi della pagina con qualche riga Javascript. 
 Molto molto meglio, ma rimane comunque la necessità di fare il “polling” di continuo al server per richiedere i dati aggiornati a causa del meccanismo browser/server di cui prima.
 
-Noi però vogliamo che il funzionamento sia completamente asincrono e bidirezionale; ecco che ci viene quindi in aiuto WebSocket, largamente supportato dal 99% dei browser moderni (certo se usate ancora Netscape Navigator non funzionerà …).
+Noi però vogliamo che il funzionamento sia completamente asincrono e bidirezionale; ecco che ci viene quindi in aiuto **WebSocket**, largamente supportato dal 99% dei browser moderni (certo se usate ancora Netscape Navigator non funzionerà …).
 
-WebSocket è una tecnologia web che fornisce canali di comunicazione full-duplex attraverso una singola connessione TCP (wikipedia)
+_WebSocket è una tecnologia web che fornisce canali di comunicazione full-duplex attraverso una singola connessione TCP (wikipedia)_
 Useremo quindi questo canale full-duplex WebSocket per “veicolare” tutte le informazioni necessarie per renderizzare correttamente la pagina in risposta a quello che accade fisicamente lato microcontrollore.
-A questo punto, visto che il canale è già aperto, lo useremo anche nel senso contrario ovvero per inoltrare le richiesta dal browser al microcontrollore così da mantenere lo stesso approccio.
 
 WebSocket è nativamente supportato dal Javascript e quindi da Vue. Non ci sarebbe necessità di installare moduli aggiuntivi, noi però andremo comunque ad installare vue-native-websocket che ci semplifica un po’ la gestione del sorgente Vue oltre ad avere delle funzionalità di base già implementate (auto-reconnect, formattazione dei dati etc etc).
 
-Le informazioni scambiate tra microcontrollore e browser saranno formattate secondo lo standard JSON, anch’esso nativamente supportato da Javascript mentre lato microcontrollore vi consiglio di installare l’ottima libreria ArduinoJson
-Per quanto riguarda il server WebSocket ho invece usato questa libreria Links2004/arduinoWebSockets
+Le informazioni scambiate tra microcontrollore e browser saranno formattate secondo lo standard JSON, anch’esso nativamente supportato da Javascript mentre lato microcontrollore vi consiglio di installare l’ottima libreria [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+
+Per quanto riguarda il server WebSocket ho invece usato questa libreria [Links2004/arduinoWebSockets](https://github.com/Links2004/arduinoWebSockets)
 
 
