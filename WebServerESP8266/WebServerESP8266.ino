@@ -17,8 +17,8 @@ const char inLabels[][5] = {"LED1", "LED2", "LED3"};
 const byte outputs[] = { D3, LED_BUILTIN };
 const char outLabels[][5] = {"OUT1", "OUT2"};
 
-const char* ssid     = "PuccosNET";
-const char* password = "Tole76tnt";
+const char* ssid     = "ttttttttT";
+const char* password = "xcxxxxccc";
 
 // WebSocket server
 WebSocketsServer webSocket = WebSocketsServer(81);
