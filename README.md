@@ -2,10 +2,6 @@
 
 **Introduzione**
 
-Premessa d’obbligo! Io non sono uno sviluppatore web, la pagnotta la porto a casa in altro modo. Metto le mani avanti per due motivi.
-Per i più esperti su questi temi: se ho scritto qualche stupidaggine, non me ne vogliate a male :)
-Per i principianti: con un po’ di impegno e volontà si porta a casa qualsiasi risultato ci si prefigge.
-
 Uno tra gli argomenti più “caldi” nel mondo Arduino & co. è come far fare alla nostra board qualcosa in risposta ad un comando impartito da remoto, come ad esempio attraverso una pagina web o una _“single page application”_.
 La rete è piena di tutorial e video tutorial su questo argomento, ma la maggior parte di questi non sono altro che un continuo copia e incolla di altri tutorial fatti a partire dagli esempi inclusi nelle librerie o poco più (dove giustamente vengono illustrate solo le funzionalità “di base”).
 
