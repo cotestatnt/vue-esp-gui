@@ -20,7 +20,7 @@ let html = `
   </head>
   <body>
     <noscript>
-      <strong>Sorry, but Arduino Google API doesn't work without JavaScript. Please enable to continue.</strong>
+      <strong>Sorry, but this page doesn't work without JavaScript. Please enable to continue.</strong>
     </noscript>
     <div id="app"></div>
     <script>${js}</script>
