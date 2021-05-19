@@ -7,8 +7,8 @@ import '@/style/tooltip.css';
 
 import VueNativeSock from 'vue-native-websocket'
 
-//let wsaddress = 'ws://' + window.location.hostname + ':81'  //'ws://192.168.249.157:81'
-let wsaddress = 'ws://192.168.2.62:81'  //'ws://192.168.249.157:81'
+let wsaddress = 'ws://' + window.location.hostname + ':81'  //'ws://192.168.249.157:81'
+//let wsaddress = 'ws://192.168.2.62:81'  //'ws://192.168.249.157:81'
 
 Vue.use(VueNativeSock, wsaddress, {
   format: 'json',
